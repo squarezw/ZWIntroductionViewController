@@ -2,9 +2,9 @@ What?
 -----
 Introduction View Controller
 
-![Screenshot](https://github.com/squarezw/ZWIntroductionViewController/master/screenshot.gif)
+![Screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/screenshot.gif)
 
-![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/master/screenshot.png "Screenshot of sample application on iPhone")
+![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/screenshot.png "Screenshot of sample application on iPhone")
 
 Example Code?
 -------------
