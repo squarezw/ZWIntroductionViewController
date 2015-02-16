@@ -2,6 +2,8 @@ What?
 -----
 Introduction View Controller
 
+![Screenshot](https://github.com/squarezw/ZWIntroductionViewController/master/screenshot.gif)
+
 ![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/master/screenshot.png "Screenshot of sample application on iPhone")
 
 Example Code?
@@ -45,7 +47,7 @@ Installation?
 
 This project includes a `podspec` for usage with [CocoaPods](http://http://cocoapods.org/). Simply add
 
-    pod ''
+    pod 'ZWIntroductionViewController'
 
 to your `Podfile` and run `pod install`.
 
