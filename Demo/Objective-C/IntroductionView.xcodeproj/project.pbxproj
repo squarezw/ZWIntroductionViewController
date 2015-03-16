@@ -127,7 +127,7 @@
 				59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */,
 			);
 			name = Library;
-			path = ../Library;
+			path = ../../Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
