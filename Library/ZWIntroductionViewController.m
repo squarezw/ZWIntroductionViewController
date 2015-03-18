@@ -100,6 +100,17 @@
         
         x += obj.frame.size.width;
     }];
+
+    // fix enterButton can not presenting if ScrollView have only one page
+    if (self.pageControl.numberOfPages == 1) {
+        self.enterButton.alpha = 1;
+        self.pageControl.alpha = 0;
+    }
+    
+    // fix ScrollView can not scrolling if it have only one page
+    if (self.pagingScrollView.contentSize.width == self.pagingScrollView.frame.size.width) {
+        self.pagingScrollView.contentSize = CGSizeMake(self.pagingScrollView.contentSize.width + 1, self.pagingScrollView.contentSize.height);
+    }
 }
 
 - (CGRect)frameOfPageControl
