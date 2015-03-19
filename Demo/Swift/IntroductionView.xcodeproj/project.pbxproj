@@ -119,7 +119,7 @@
 				59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */,
 			);
 			name = Library;
-			path = ../../../../Library;
+			path = ../../../Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +408,7 @@
 				59B33E521AB6A0DF00E44832 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59B33E531AB6A0DF00E44832 /* Build configuration list for PBXNativeTarget "IntroductionViewTests" */ = {
 			isa = XCConfigurationList;
@@ -416,6 +417,7 @@
 				59B33E551AB6A0DF00E44832 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
