@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var introductionView: ZWIntroductionViewController?
+    var viewController: UIViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Example 1
@@ -30,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.introductionView = nil;
             
             // enter main view , write your code ...
+//            self.viewController = UIViewController()
+//            self.viewController?.view.backgroundColor = UIColor.whiteColor()
+//            self.window?.rootViewController = self.viewController
         }
         
         self.window = UIWindow()

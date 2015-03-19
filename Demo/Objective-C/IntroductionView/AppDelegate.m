@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ZWIntroductionViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -42,6 +43,8 @@
         weakSelf.introductionView = nil;
 
         // enter main view , write your code ...
+//        ViewController *mainVC = [[ViewController alloc] init];
+//        weakSelf.window.rootViewController = mainVC;
         
     };
     
