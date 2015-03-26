@@ -14,6 +14,8 @@ A working sample iOS Xcode project is available in the `Demo` directory.
 Usage?
 ----
 
+Objective-C
+
     #import "ZWIntroductionViewController.h"
     
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -36,11 +38,33 @@ Usage?
         weakSelf.introductionView = nil;
 
         // enter main view , write your code ...
-        
+    //  ViewController *mainVC = [[ViewController alloc] init];
+    //  weakSelf.window.rootViewController = mainVC;
     };
     }
 
+Swift
 
+        // Example 1
+        var coverImageNames = ["img_index_01txt","img_index_02txt", "img_index_03txt"]
+        var backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
+        self.introductionView = ZWIntroductionViewController(coverImageNames: coverImageNames, backgroundImageNames: backgroundImageNames)
+        
+        // Example 2
+    //        var enterButton: UIButton? = UIButton()
+    //        enterButton?.setBackgroundImage(UIImage(named: "bg_bar"), forState: UIControlState.Normal)
+    //        self.introductionView = ZWIntroductionViewController(coverImageNames: coverImageNames, backgroundImageNames: backgroundImageNames, button: enterButton)
+        
+        self.introductionView!.didSelectedEnter = {
+            self.introductionView!.view.removeFromSuperview()
+            self.introductionView = nil;
+            
+            // enter main view , write your code ...
+    //            self.viewController = UIViewController()
+    //            self.viewController?.view.backgroundColor = UIColor.whiteColor()
+    //            self.window?.rootViewController = self.viewController
+        }       
+ 
 
 Installation?
 -------------
