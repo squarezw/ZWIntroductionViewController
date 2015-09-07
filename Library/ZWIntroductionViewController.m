@@ -245,7 +245,9 @@
 
 - (void)enter:(id)object
 {
-    self.didSelectedEnter();
+    if (self.didSelectedEnter) {
+        self.didSelectedEnter();
+    }
 }
 
 - (void)didReceiveMemoryWarning {
