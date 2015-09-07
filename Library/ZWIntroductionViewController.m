@@ -1,9 +1,8 @@
 //
 //  LGIntroductionViewController.m
-//  ladygo
 //
 //  Created by square on 15/1/21.
-//  Copyright (c) 2015年 ju.taobao.com. All rights reserved.
+//  Copyright (c) 2015年 square. All rights reserved.
 //
 
 #import "ZWIntroductionViewController.h"
