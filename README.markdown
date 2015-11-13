@@ -4,7 +4,7 @@ Introduction View Controller
 
 ![Screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/screenshot.gif)
 
-![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/screenshot.png "Screenshot of sample application on iPhone")
+![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/simple.gif "Screenshot of sample application on iPhone")
 
 Example Code?
 -------------
@@ -19,28 +19,34 @@ Objective-C
     #import "ZWIntroductionViewController.h"
     
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        // ... 
-    // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"img_index_01txt", @"img_index_02txt", @"img_index_03txt"];
-    NSArray *backgroundImageNames = @[@"img_index_01bg", @"img_index_02bg", @"img_index_03bg"];
-    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.backgroundColor = [UIColor whiteColor];
+        ViewController *vc = [[ViewController alloc] init];
+        self.window.rootViewController = vc;
+        [_window makeKeyAndVisible];
     
-    // Example 2 : Custom enter button
-    //    UIButton *enterButton = [UIButton new];
-    //    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
-    //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
+        // Added Introduction View Controller
+        NSArray *coverImageNames = @[@"img_index_01txt", @"img_index_02txt", @"img_index_03txt"];
+        NSArray *backgroundImageNames = @[@"img_index_01bg", @"img_index_02bg", @"img_index_03bg"];
     
-    [self.window addSubview:self.introductionView.view];
+        self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
-    __weak AppDelegate *weakSelf = self;
-    self.introductionView.didSelectedEnter = ^() {
-        [weakSelf.introductionView.view removeFromSuperview];
-        weakSelf.introductionView = nil;
-
-        // enter main view , write your code ...
-    //  ViewController *mainVC = [[ViewController alloc] init];
-    //  weakSelf.window.rootViewController = mainVC;
-    };
+        // Example 1 : Simple
+        //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:backgroundImageNames];
+    
+        // Example 2 : Custom Button
+        //    UIButton *enterButton = [UIButton new];
+        //    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
+        //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
+    
+        [self.window addSubview:self.introductionView.view];
+    
+        __weak AppDelegate *weakSelf = self;
+        self.introductionView.didSelectedEnter = ^() {        
+            weakSelf.introductionView = nil;
+        };
+    
+        return YES;
     }
 
 Swift

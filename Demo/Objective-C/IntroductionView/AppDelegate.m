@@ -23,14 +23,20 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    ViewController *vc = [[ViewController alloc] init];
+    self.window.rootViewController = vc;
     [_window makeKeyAndVisible];
     
     // Added Introduction View Controller
     NSArray *coverImageNames = @[@"img_index_01txt", @"img_index_02txt", @"img_index_03txt"];
     NSArray *backgroundImageNames = @[@"img_index_01bg", @"img_index_02bg", @"img_index_03bg"];
+
     self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
-    // Example 2
+    // Example 1 : Simple
+//    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:backgroundImageNames];
+    
+    // Example 2 : Custom Button
 //    UIButton *enterButton = [UIButton new];
 //    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
 //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
@@ -38,14 +44,8 @@
     [self.window addSubview:self.introductionView.view];
     
     __weak AppDelegate *weakSelf = self;
-    self.introductionView.didSelectedEnter = ^() {
-        [weakSelf.introductionView.view removeFromSuperview];
+    self.introductionView.didSelectedEnter = ^() {        
         weakSelf.introductionView = nil;
-
-        // enter main view , write your code ...
-//        ViewController *mainVC = [[ViewController alloc] init];
-//        weakSelf.window.rootViewController = mainVC;
-        
     };
     
     return YES;

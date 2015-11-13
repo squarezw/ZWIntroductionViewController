@@ -26,9 +26,9 @@ typedef void (^DidSelectedEnter)();
  */
 @property (nonatomic, strong) NSArray *coverImageNames;
 
+- (id)initWithCoverImageNames:(NSArray*)coverNames;
 
 - (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames;
-
 
 - (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames button:(UIButton*)button;
 
