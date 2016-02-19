@@ -6,7 +6,7 @@ Introduction View Controller
 
 ![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/simple.gif "Screenshot of sample application on iPhone")
 
-[![demo.png](https://github.com/squarezw/ZWIntroductionViewController/blob/master/demo.png =50x60)](https://appetize.io/embed/3fce4yug3e1jxyvvuwgmvbkq0m)
+[![demo.png](https://github.com/squarezw/ZWIntroductionViewController/blob/master/demo.png  =50x60)](https://appetize.io/embed/3fce4yug3e1jxyvvuwgmvbkq0m)
 
 
 Example Code?
