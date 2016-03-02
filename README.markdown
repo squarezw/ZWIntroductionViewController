@@ -1,6 +1,8 @@
 What?
 -----
-Introduction View Controller
+**Introduction View Controller**
+
+It will display a fullscreen swipeable modal window to guide the user through a welcome screen / tutorial
 
 ![Screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/screenshot.gif)
 
@@ -10,10 +12,6 @@ Introduction View Controller
     <img width="50" height="60" src="demo.png"/>
 </a>
 
-Example Code?
--------------
-
-A working sample iOS Xcode project is available in the `Demo` directory.
 
 Usage?
 ----
