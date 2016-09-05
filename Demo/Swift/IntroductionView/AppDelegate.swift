@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = UIViewController()
         
-        // Example 1
+        // data source
         self.coverImageNames = ["img_index_01txt","img_index_02txt", "img_index_03txt"]
         self.backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
         self.coverTitles = ["MAKE THE WORLD", "THE BETTER PLACE"]
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return vc
     }
 
-    // Example 2 : Custom Button
+    // Example 2 : Cover Images
     func coverImagesIntroductionView() -> ZWIntroductionViewController {
         let vc = ZWIntroductionViewController(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames)
         return vc

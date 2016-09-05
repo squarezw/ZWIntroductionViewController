@@ -73,7 +73,7 @@
     return vc;
 }
 
-// Example 2 : Custom Button
+// Example 2 : Cover Images
 - (ZWIntroductionViewController *)coverImagesIntroductionView
 {
     ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames];
