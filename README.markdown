@@ -26,7 +26,7 @@ It will display a fullscreen swipeable modal window to guide the user through a 
 Usage?
 ----
 
-### Objective-C
+### Swift
 
 
 ```
@@ -108,7 +108,7 @@ Usage?
             
 ```
 
-### Swift
+### Objective-C
 
 ```
 	// data source
