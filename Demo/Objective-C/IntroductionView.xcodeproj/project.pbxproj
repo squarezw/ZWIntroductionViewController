@@ -14,6 +14,7 @@
 		59D336ED1A91D23B0089837F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59D336EB1A91D23B0089837F /* LaunchScreen.xib */; };
 		59D336F91A91D23B0089837F /* IntroductionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D336F81A91D23B0089837F /* IntroductionViewTests.m */; };
 		59D337051A91D2DC0089837F /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */; };
+		9516056D1D7D39AE007016EB /* intro_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9516056C1D7D39AE007016EB /* intro_video.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		59D336F81A91D23B0089837F /* IntroductionViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewTests.m; sourceTree = "<group>"; };
 		59D337031A91D2DC0089837F /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
 		59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
+		9516056C1D7D39AE007016EB /* intro_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro_video.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		59D336DB1A91D23B0089837F /* IntroductionView */ = {
 			isa = PBXGroup;
 			children = (
+				9516056C1D7D39AE007016EB /* intro_video.mp4 */,
 				59D336E01A91D23B0089837F /* AppDelegate.h */,
 				59D336E11A91D23B0089837F /* AppDelegate.m */,
 				59D336E31A91D23B0089837F /* ViewController.h */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59D336ED1A91D23B0089837F /* LaunchScreen.xib in Resources */,
+				9516056D1D7D39AE007016EB /* intro_video.mp4 in Resources */,
 				59D336EA1A91D23B0089837F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

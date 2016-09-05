@@ -14,6 +14,14 @@
 
 @property (nonatomic, strong) ZWIntroductionViewController *introductionView;
 
+@property (nonatomic, strong) NSArray *coverImageNames;
+
+@property (nonatomic, strong) NSArray *backgroundImageNames;
+
+@property (nonatomic, strong) NSArray *coverTitles;
+
+@property (nonatomic, strong) NSURL *videoURL;
+
 @end
 
 @implementation AppDelegate
@@ -26,20 +34,27 @@
     ViewController *vc = [[ViewController alloc] init];
     self.window.rootViewController = vc;
     [_window makeKeyAndVisible];
-    
-    // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"img_index_01txt", @"img_index_02txt", @"img_index_03txt"];
-    NSArray *backgroundImageNames = @[@"img_index_01bg", @"img_index_02bg", @"img_index_03bg"];
 
-    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
+    // data source
+    self.coverImageNames = @[@"img_index_01txt", @"img_index_02txt", @"img_index_03txt"];
+    self.backgroundImageNames = @[@"img_index_01bg", @"img_index_02bg", @"img_index_03bg"];
+    self.coverTitles = @[@"MAKE THE WORLD", @"THE BETTER PLACE"];
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"intro_video" ofType:@"mp4"];
+    self.videoURL = [NSURL fileURLWithPath:filePath];
+
+    // Added Introduction View Controller
     
-    // Example 1 : Simple
-//    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:backgroundImageNames];
+//    self.introductionView = [self simpleIntroductionView];
     
-    // Example 2 : Custom Button
-//    UIButton *enterButton = [UIButton new];
-//    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
-//    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
+//    self.introductionView = [self coverImagesIntroductionView];
+    
+//    self.introductionView = [self customButtonIntroductionView];
+    
+    self.introductionView = [self videoIntroductionView];
+    
+//    self.introductionView = [self advanceIntroductionView];
+
     
     [self.window addSubview:self.introductionView.view];
     
@@ -51,26 +66,57 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+// Example 1 : Simple
+- (ZWIntroductionViewController *)simpleIntroductionView
+{
+    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.backgroundImageNames];
+    return vc;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+// Example 2 : Custom Button
+- (ZWIntroductionViewController *)coverImagesIntroductionView
+{
+    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames];
+    return vc;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+// Example 3 : Custom Button
+- (ZWIntroductionViewController *)customButtonIntroductionView
+{
+    UIButton *enterButton = [UIButton new];
+    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
+    [enterButton setTitle:@"Login" forState:UIControlStateNormal];
+    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames button:enterButton];
+    return vc;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+// Example 4 : Video
+- (ZWIntroductionViewController *)videoIntroductionView
+{
+    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithVideo:self.videoURL volume:0.7];
+    vc.coverImageNames = self.coverImageNames;
+    vc.autoScrolling = YES;
+    return vc;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+// Example 5 : Advance
+- (ZWIntroductionViewController *)advanceIntroductionView
+{
+    UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(3, self.window.frame.size.height - 60, self.window.frame.size.width - 6, 50)];
+    loginButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+    [loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    
+    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithVideo:self.videoURL volume:0.7];
+    vc.coverImageNames = self.coverImageNames;
+    vc.autoScrolling = YES;
+    vc.hiddenEnterButton = YES;
+    vc.pageControlOffset = CGPointMake(0, -100);
+    vc.labelAttributes = @{ NSFontAttributeName : [UIFont fontWithName:@"Arial-BoldMT" size:28.0],
+                                               NSForegroundColorAttributeName : [UIColor whiteColor] };
+    vc.coverView = loginButton;
+    
+    vc.coverTitles = self.coverTitles;
+    
+    return vc;
 }
-
 @end

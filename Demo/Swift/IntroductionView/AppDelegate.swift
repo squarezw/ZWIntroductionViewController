@@ -14,58 +14,96 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var introductionView: ZWIntroductionViewController?
     var viewController: UIViewController?
+    
+    var coverImageNames: [AnyObject]?
+    var backgroundImageNames: [AnyObject]?
+    var coverTitles: [AnyObject]?
+    var videoURL: NSURL?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Example 1
-        var coverImageNames = ["img_index_01txt","img_index_02txt", "img_index_03txt"]
-        var backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
-        self.introductionView = ZWIntroductionViewController(coverImageNames: coverImageNames, backgroundImageNames: backgroundImageNames)
+        self.window = UIWindow()
+        self.window!.frame = UIScreen.mainScreen().bounds
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = UIViewController()
         
-        // Example 2
-//        var enterButton: UIButton? = UIButton()
-//        enterButton?.setBackgroundImage(UIImage(named: "bg_bar"), forState: UIControlState.Normal)
-//        self.introductionView = ZWIntroductionViewController(coverImageNames: coverImageNames, backgroundImageNames: backgroundImageNames, button: enterButton)
+        // Example 1
+        self.coverImageNames = ["img_index_01txt","img_index_02txt", "img_index_03txt"]
+        self.backgroundImageNames = ["img_index_01bg","img_index_02bg", "img_index_03bg"]
+        self.coverTitles = ["MAKE THE WORLD", "THE BETTER PLACE"]
+        
+        let filePath = NSBundle.mainBundle().pathForResource("intro_video", ofType: "mp4")
+        self.videoURL = NSURL.fileURLWithPath(filePath!)
+        
+        // Added Introduction View Controller
+        
+//        self.introductionView = self.simpleIntroductionView()
+        
+//        self.introductionView = self.coverImagesIntroductionView()
+        
+//        self.introductionView = self.customButtonIntroductionView()
+        
+        self.introductionView = self.videoIntroductionView();
+        
+//        self.introductionView = self.advanceIntroductionView();
+        
+        self.window?.addSubview(self.introductionView!.view)
         
         self.introductionView!.didSelectedEnter = {
             self.introductionView!.view.removeFromSuperview()
             self.introductionView = nil;
-            
             // enter main view , write your code ...
-//            self.viewController = UIViewController()
-//            self.viewController?.view.backgroundColor = UIColor.whiteColor()
-//            self.window?.rootViewController = self.viewController
         }
-        
-        self.window = UIWindow()
-        self.window!.frame = UIScreen.mainScreen().bounds
-        self.window?.makeKeyAndVisible()
-        self.window?.addSubview(self.introductionView!.view)
         
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    // Example 1 : Simple
+    func simpleIntroductionView() -> ZWIntroductionViewController {
+        let vc = ZWIntroductionViewController(coverImageNames: self.backgroundImageNames)
+        return vc
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // Example 2 : Custom Button
+    func coverImagesIntroductionView() -> ZWIntroductionViewController {
+        let vc = ZWIntroductionViewController(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames)
+        return vc
     }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    // Example 3 : Custom Button
+    func customButtonIntroductionView() -> ZWIntroductionViewController {
+        let enterButton = UIButton()
+        enterButton.setBackgroundImage(UIImage(named: "bg_bar"), forState: .Normal)
+        enterButton.setTitle("Login", forState: .Normal)
+        let vc = ZWIntroductionViewController(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames, button: enterButton)
+        return vc
     }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // Example 4 : Video
+    func videoIntroductionView() -> ZWIntroductionViewController {
+        let vc = ZWIntroductionViewController(video: self.videoURL)
+        vc.coverImageNames = self.coverImageNames
+        vc.autoScrolling = true
+        return vc
     }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    // Example 5 : Advance
+    func advanceIntroductionView() -> ZWIntroductionViewController {
+        let loginButton = UIButton(frame: CGRectMake(3, self.window!.frame.size.height - 60, self.window!.frame.size.width - 6, 50))
+        loginButton.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
+        loginButton.setTitle("Login", forState: .Normal)
+        let vc = ZWIntroductionViewController(video: self.videoURL, volume: 0.7)
+        vc.coverImageNames = self.coverImageNames
+        vc.autoScrolling = true
+        vc.hiddenEnterButton = true
+        vc.pageControlOffset = CGPointMake(0, -100)
+        vc.labelAttributes = [NSFontAttributeName: UIFont(name: "Arial-BoldMT", size: 28.0)!,
+                              NSForegroundColorAttributeName: UIColor.whiteColor()]
+        vc.coverView = loginButton
+        
+        vc.coverTitles = self.coverTitles
+        
+        return vc
     }
-
 
 }
 

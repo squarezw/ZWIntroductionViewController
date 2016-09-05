@@ -12,6 +12,7 @@
 		59B33E411AB6A0DF00E44832 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B33E3F1AB6A0DF00E44832 /* LaunchScreen.xib */; };
 		59B33E4D1AB6A0DF00E44832 /* IntroductionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B33E4C1AB6A0DF00E44832 /* IntroductionViewTests.swift */; };
 		59B33E591AB6A11100E44832 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */; };
+		9516056F1D7D8298007016EB /* intro_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9516056E1D7D8298007016EB /* intro_video.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		59B33E571AB6A11100E44832 /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
 		59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
 		59B33E5A1AB6A13400E44832 /* IntroductionView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntroductionView-Bridging-Header.h"; sourceTree = "<group>"; };
+		9516056E1D7D8298007016EB /* intro_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro_video.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		59B33E341AB6A0DF00E44832 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9516056E1D7D8298007016EB /* intro_video.mp4 */,
 				59B33E351AB6A0DF00E44832 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -166,6 +169,7 @@
 		59B33E291AB6A0DF00E44832 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = square;
 				TargetAttributes = {
@@ -203,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59B33E411AB6A0DF00E44832 /* LaunchScreen.xib in Resources */,
+				9516056F1D7D8298007016EB /* intro_video.mp4 in Resources */,
 				59B33E3E1AB6A0DF00E44832 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

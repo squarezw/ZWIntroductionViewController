@@ -14,13 +14,37 @@
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, assign) NSInteger centerPageIndex;
 
+@property (nonatomic) NSURL *videoURL;
+@property (nonatomic) AVPlayer *player;
+@property (nonatomic) NSTimer *timer;
+
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+
 @end
 
 @implementation ZWIntroductionViewController
 
+@synthesize pageControlOffset = _pageControlOffset;
+
 - (void)dealloc
 {
+    [self.player pause];
+    self.player = nil;
+    [self stopTimer];
     self.view = nil;
+}
+
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)startTimer
+{
+    if (self.autoScrolling) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    }
 }
 
 - (id)initWithCoverImageNames:(NSArray *)coverNames
@@ -48,14 +72,36 @@
     return self;
 }
 
+- (id)initWithVideo:(NSURL *)videoURL
+{
+    if (self = [super init]) {
+        self.videoURL = videoURL;
+        self.volume = 0.0;
+    }
+    return self;
+}
+
+- (id)initWithVideo:(NSURL *)videoURL volume:(float)volume
+{
+    if (self = [super init]) {
+        self.videoURL = videoURL;
+        self.volume = volume;
+    }
+    return self;
+}
+
 - (void)initSelfWithCoverNames:(NSArray *)coverNames backgroundImageNames:(NSArray *)bgNames
 {
     self.coverImageNames = coverNames;
     self.backgroundImageNames = bgNames;
 }
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self addVideo];
     
     [self addBackgroundViews];
     
@@ -83,6 +129,21 @@
     [self.view addSubview:self.enterButton];
     
     [self reloadPages];
+    
+    [self.view addSubview:self.coverView];
+    
+    [self startTimer];
+}
+
+- (void)onTimer
+{
+    CGRect frame = self.pagingScrollView.frame;
+    frame.origin.x = frame.size.width * (self.pageControl.currentPage + 1);
+    frame.origin.y = 0;
+    if (frame.origin.x >= self.pagingScrollView.contentSize.width) {
+        frame.origin.x = 0;
+    }
+    [self.pagingScrollView scrollRectToVisible:frame animated:YES];
 }
 
 - (void)addBackgroundViews
@@ -100,9 +161,45 @@
     self.backgroundViews = [[tmpArray reverseObjectEnumerator] allObjects];
 }
 
+#pragma mark - Video
+
+- (void)addVideo
+{
+    if (!self.videoURL) {
+        return;
+    }
+    
+    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:self.videoURL];
+    
+    self.player = [AVPlayer playerWithPlayerItem:playerItem];
+    self.player.volume = self.volume;
+    
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    playerLayer.frame = self.view.layer.bounds;
+    [self.view.layer addSublayer:playerLayer];
+    
+    [self.player play];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayDidEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:self.player.currentItem];
+}
+
+- (void)moviePlayDidEnd:(NSNotification*)notification{
+    // loop movie
+    AVPlayerItem *item = [notification object];
+    [item seekToTime:kCMTimeZero];
+    [self.player play];
+}
+
+
+#pragma mark - load items
+
 - (void)reloadPages
 {
-    self.pageControl.numberOfPages = [[self coverImageNames] count];
+    self.pageControl.numberOfPages = [self numberOfPagesInPagingScrollView];
     self.pagingScrollView.contentSize = [self contentSizeOfScrollView];
     
     __block CGFloat x = 0;
@@ -127,7 +224,16 @@
 
 - (CGRect)frameOfPageControl
 {
-    return CGRectMake(0, self.view.bounds.size.height - 30, self.view.bounds.size.width, 30);
+    CGRect orgFrame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 30);
+    return CGRectOffset(orgFrame, self.pageControlOffset.x, self.pageControlOffset.y);
+}
+
+- (CGPoint)pageControlOffset
+{
+    if (CGPointEqualToPoint(_pageControlOffset, CGPointZero)) {
+        return CGPointMake(0, -30);
+    }
+    return _pageControlOffset;
 }
 
 - (CGRect)frameOfEnterButton
@@ -156,6 +262,14 @@
     self.pageControl.currentPage = scrollView.contentOffset.x / (scrollView.contentSize.width / [self numberOfPagesInPagingScrollView]);
     
     [self pagingScrollViewDidChangePages:scrollView];
+    
+    if (scrollView.isTracking) {
+        [self stopTimer];
+    } else {
+        if (!self.timer) {
+            [self startTimer];
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
@@ -181,11 +295,19 @@
 
 - (NSInteger)numberOfPagesInPagingScrollView
 {
-    return [[self coverImageNames] count];
+    if (self.coverTitles) {
+        return self.coverTitles.count;
+    } else {
+        return self.coverImageNames.count;
+    }
 }
 
 - (void)pagingScrollViewDidChangePages:(UIScrollView *)pagingScrollView
 {
+    if (self.hiddenEnterButton) {
+        return;
+    }
+    
     if ([self isLast:self.pageControl]) {
         if (self.pageControl.alpha == 1) {
             self.enterButton.alpha = 0;
@@ -216,12 +338,29 @@
     return result;
 }
 
-- (UIImageView*)scrollViewPage:(NSString*)imageName
+- (UIView*)pageViewWithImageName:(NSString*)name
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    CGSize size = {[[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height};
-    imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, size.width, size.height);
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:name]];
+    CGSize size = self.view.frame.size;
+    imageView.frame = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, size.width, size.height);
     return imageView;
+}
+
+- (UIView*)pageViewWithTitle:(NSString*)title
+{
+    CGSize size = self.view.frame.size;
+    CGRect rect;
+    CGFloat height = 30;
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending) {
+        CGSize size = [title sizeWithAttributes:self.labelAttributes];
+        height = size.height;
+    }
+    rect = CGRectMake(0, size.height + self.pageControlOffset.y - height, size.width, height);
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:rect];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.attributedText = [[NSAttributedString alloc] initWithString:title attributes:self.labelAttributes];
+    return label;
 }
 
 - (NSArray*)scrollViewPages
@@ -234,13 +373,22 @@
         return _scrollViewPages;
     }
     
+    
     NSMutableArray *tmpArray = [NSMutableArray new];
-    [self.coverImageNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        UIImageView *v = [self scrollViewPage:obj];
-        [tmpArray addObject:v];
-        
-    }];
+    
+    if (self.coverTitles) {
+        [self.coverTitles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            [tmpArray addObject:[self pageViewWithTitle:obj]];
+            
+        }];
+    } else if (self.coverImageNames) {
+        [self.coverImageNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            [tmpArray addObject:[self pageViewWithImageName:obj]];
+            
+        }];
+    }
     
     _scrollViewPages = tmpArray;
     
@@ -257,6 +405,8 @@
 
 - (void)enter:(id)object
 {
+    [self stopTimer];
+
     if (self.didSelectedEnter) {
         self.didSelectedEnter();
     }
@@ -266,6 +416,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
