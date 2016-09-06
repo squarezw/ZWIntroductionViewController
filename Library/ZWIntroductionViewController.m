@@ -98,6 +98,12 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self stopTimer];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

@@ -18,7 +18,7 @@ It will display a fullscreen swipeable modal window to guide the user through a 
 
 ![Sample application screenshot](https://github.com/squarezw/ZWIntroductionViewController/blob/master/simple.gif "Screenshot of sample application on iPhone")
 
-<a href='https://appetize.io/embed/3fce4yug3e1jxyvvuwgmvbkq0m' alt='Live demo'>
+<a href='https://appetize.io/embed/29xabc89e2u0j8uh3y0dkkk0yg' alt='Live demo'>
     <img width="50" height="60" src="demo.png"/>
 </a>
 
