@@ -16,6 +16,7 @@ typedef void (^DidSelectedEnter)();
 @property (nonatomic, strong) UIButton *enterButton;
 @property (nonatomic, assign) BOOL hiddenEnterButton; // default is NO
 @property (nonatomic, assign) BOOL autoScrolling; // default is NO
+@property (nonatomic, assign) BOOL autoLoopPlayVideo; // default is YES
 
 @property (nonatomic, copy) DidSelectedEnter didSelectedEnter;
 

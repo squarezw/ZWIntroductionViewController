@@ -49,36 +49,28 @@
 
 - (id)initWithCoverImageNames:(NSArray *)coverNames
 {
-    if (self = [super init]) {
-        [self initSelfWithCoverNames:coverNames backgroundImageNames:nil];
-    }
-    return self;
+    return [self initWithCoverImageNames:coverNames backgroundImageNames:nil button:nil];
 }
 
 - (id)initWithCoverImageNames:(NSArray *)coverNames backgroundImageNames:(NSArray *)bgNames
 {
-    if (self = [super init]) {
-        [self initSelfWithCoverNames:coverNames backgroundImageNames:bgNames];
-    }
-    return self;
+    return [self initWithCoverImageNames:coverNames backgroundImageNames:bgNames button:nil];
 }
 
 - (id)initWithCoverImageNames:(NSArray *)coverNames backgroundImageNames:(NSArray *)bgNames button:(UIButton *)button
 {
     if (self = [super init]) {
-        [self initSelfWithCoverNames:coverNames backgroundImageNames:bgNames];
+        self.coverImageNames = coverNames;
+        self.backgroundImageNames = bgNames;
         self.enterButton = button;
+        [self initSelf];
     }
     return self;
 }
 
 - (id)initWithVideo:(NSURL *)videoURL
 {
-    if (self = [super init]) {
-        self.videoURL = videoURL;
-        self.volume = 0.0;
-    }
-    return self;
+    return [self initWithVideo:videoURL volume:0.0];
 }
 
 - (id)initWithVideo:(NSURL *)videoURL volume:(float)volume
@@ -86,14 +78,16 @@
     if (self = [super init]) {
         self.videoURL = videoURL;
         self.volume = volume;
+        [self initSelf];
     }
     return self;
 }
 
-- (void)initSelfWithCoverNames:(NSArray *)coverNames backgroundImageNames:(NSArray *)bgNames
+- (void)initSelf
 {
-    self.coverImageNames = coverNames;
-    self.backgroundImageNames = bgNames;
+    self.hiddenEnterButton = NO;
+    self.autoScrolling = NO;
+    self.autoLoopPlayVideo = YES;
 }
 
 #pragma mark - View lifecycle
@@ -194,10 +188,14 @@
 }
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
-    // loop movie
-    AVPlayerItem *item = [notification object];
-    [item seekToTime:kCMTimeZero];
-    [self.player play];
+    if (self.autoLoopPlayVideo) {
+        // loop movie
+        AVPlayerItem *item = [notification object];
+        [item seekToTime:kCMTimeZero];
+        [self.player play];
+    } else {
+        [self enter:nil];
+    }
 }
 
 
