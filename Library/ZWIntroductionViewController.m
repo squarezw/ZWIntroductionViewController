@@ -121,6 +121,7 @@
         [self.enterButton setTitle:NSLocalizedString(@"Enter", nil) forState:UIControlStateNormal];
         self.enterButton.layer.borderWidth = 0.5;
         self.enterButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.enterButton.hidden = self.hiddenEnterButton;
     }
     
     [self.enterButton addTarget:self action:@selector(enter:) forControlEvents:UIControlEventTouchUpInside];
