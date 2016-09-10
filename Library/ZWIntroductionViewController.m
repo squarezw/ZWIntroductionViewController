@@ -28,6 +28,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.player pause];
     self.player = nil;
     [self stopTimer];
@@ -88,6 +89,12 @@
     self.hiddenEnterButton = NO;
     self.autoScrolling = NO;
     self.autoLoopPlayVideo = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)applicationWillEnterForeground:(id)sender
+{
+    [self.player play];
 }
 
 #pragma mark - View lifecycle
