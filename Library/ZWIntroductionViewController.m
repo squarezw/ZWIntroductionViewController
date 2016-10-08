@@ -129,10 +129,10 @@
         self.enterButton.layer.borderWidth = 0.5;
         self.enterButton.layer.borderColor = [UIColor whiteColor].CGColor;
         self.enterButton.hidden = self.hiddenEnterButton;
+        self.enterButton.frame = [self frameOfEnterButton];
     }
     
-    [self.enterButton addTarget:self action:@selector(enter:) forControlEvents:UIControlEventTouchUpInside];
-    self.enterButton.frame = [self frameOfEnterButton];
+    [self.enterButton addTarget:self action:@selector(enter:) forControlEvents:UIControlEventTouchUpInside];    
     self.enterButton.alpha = 0;
     [self.view addSubview:self.enterButton];
     
