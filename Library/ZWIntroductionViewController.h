@@ -11,58 +11,56 @@
 
 typedef void (^DidSelectedEnter)();
 
-// Deprecated.
-// This class has been replaced by the ZWIntroductionView to using
-
-__deprecated
+// Warning: this class will be Deprecated in the future . Using ZWIntroductionView to initialize
+// __deprecated
 @interface ZWIntroductionViewController : UIViewController
 
 @property (nonatomic, strong) ZWIntroductionView *introductionView;
 
 // !!!: Following properties has been forwarded to the introductionView;
-@property (nonatomic, strong) UIScrollView *pagingScrollView DEPRECATED_ATTRIBUTE;
-@property (nonatomic, strong) UIButton *enterButton DEPRECATED_ATTRIBUTE;
-@property (nonatomic, assign) BOOL hiddenEnterButton DEPRECATED_ATTRIBUTE; // default is NO
-@property (nonatomic, assign) BOOL autoScrolling DEPRECATED_ATTRIBUTE; // default is NO DEPRECATED_ATTRIBUTE
-@property (nonatomic, assign) BOOL autoLoopPlayVideo DEPRECATED_ATTRIBUTE; // default is YES DEPRECATED_ATTRIBUTE
+@property (nonatomic, strong) UIScrollView *pagingScrollView;
+@property (nonatomic, strong) UIButton *enterButton;
+@property (nonatomic, assign) BOOL hiddenEnterButton; // default is NO
+@property (nonatomic, assign) BOOL autoScrolling; // default is NO DEPRECATED_ATTRIBUTE
+@property (nonatomic, assign) BOOL autoLoopPlayVideo; // default is YES DEPRECATED_ATTRIBUTE
 
-@property (nonatomic, copy) DidSelectedEnter didSelectedEnter DEPRECATED_ATTRIBUTE;
+@property (nonatomic, copy) DidSelectedEnter didSelectedEnter;
 
-@property (nonatomic, strong) UIView *coverView DEPRECATED_ATTRIBUTE; // default is nil
+@property (nonatomic, strong) UIView *coverView; // default is nil
 
-@property (nonatomic, assign) CGPoint pageControlOffset DEPRECATED_ATTRIBUTE; // default is {0,-30}
+@property (nonatomic, assign) CGPoint pageControlOffset; // default is {0,-30}
 
 /**
  @[@"image1", @"image2"]
  */
-@property (nonatomic, strong) NSArray *backgroundImageNames DEPRECATED_ATTRIBUTE;
+@property (nonatomic, strong) NSArray *backgroundImageNames;
 
 /**
  @[@"coverImage1", @"coverImage2"]
  */
-@property (nonatomic, strong) NSArray *coverImageNames DEPRECATED_ATTRIBUTE;
+@property (nonatomic, strong) NSArray *coverImageNames;
 
 /**
  @[@"make the world", @"the better place"]
  */
-@property (nonatomic, strong) NSArray *coverTitles DEPRECATED_ATTRIBUTE;
-@property (nonatomic, strong) NSDictionary *labelAttributes DEPRECATED_ATTRIBUTE;
+@property (nonatomic, strong) NSArray *coverTitles;
+@property (nonatomic, strong) NSDictionary *labelAttributes;
 
 // video volume
-@property (nonatomic) float volume DEPRECATED_ATTRIBUTE;
+@property (nonatomic) float volume;
 
-// Deprecated:
+// Warning:
 // !!!: Following methods has been forwarded to the introductionView;
 
-- (id)initWithCoverImageNames:(NSArray*)coverNames __deprecated;
+- (id)initWithCoverImageNames:(NSArray*)coverNames;
 
-- (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames __deprecated;
+- (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames;
 
-- (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames button:(UIButton*)button __deprecated;
+- (id)initWithCoverImageNames:(NSArray*)coverNames backgroundImageNames:(NSArray*)bgNames button:(UIButton*)button;
 
 // default volume is 0
-- (id)initWithVideo:(NSURL*)videoURL __deprecated;
+- (id)initWithVideo:(NSURL*)videoURL;
 
-- (id)initWithVideo:(NSURL*)videoURL volume:(float)volume __deprecated;
+- (id)initWithVideo:(NSURL*)videoURL volume:(float)volume;
 
 @end
