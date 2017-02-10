@@ -1,6 +1,6 @@
 What?
 -----
-**Introduction View Controller**
+**Introduction View**
 
 It will display a fullscreen swipeable modal window to guide the user through a welcome screen / tutorial
 
@@ -50,49 +50,49 @@ Usage?
         
 //        self.introductionView = self.advanceIntroductionView();
         
-        self.window?.addSubview(self.introductionView!.view)
+        self.window?.addSubview(self.introductionView)
         
         self.introductionView!.didSelectedEnter = {
-            self.introductionView!.view.removeFromSuperview()
+            self.introductionView!.removeFromSuperview()
             self.introductionView = nil;
             // enter main view , write your code ...
         }
         
     // Example 1 : Simple
-    func simpleIntroductionView() -> ZWIntroductionViewController {
-        let vc = ZWIntroductionViewController(coverImageNames: self.backgroundImageNames)
+    func simpleIntroductionView() -> ZWIntroductionView {
+        let vc = ZWIntroductionView(coverImageNames: self.backgroundImageNames)
         return vc
     }
 
     // Example 2 : Cover Images
-    func coverImagesIntroductionView() -> ZWIntroductionViewController {
-        let vc = ZWIntroductionViewController(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames)
+    func coverImagesIntroductionView() -> ZWIntroductionView {
+        let vc = ZWIntroductionView(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames)
         return vc
     }
     
     // Example 3 : Custom Button
-    func customButtonIntroductionView() -> ZWIntroductionViewController {
+    func customButtonIntroductionView() -> ZWIntroductionView {
         let enterButton = UIButton()
         enterButton.setBackgroundImage(UIImage(named: "bg_bar"), forState: .Normal)
         enterButton.setTitle("Login", forState: .Normal)
-        let vc = ZWIntroductionViewController(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames, button: enterButton)
+        let vc = ZWIntroductionView(coverImageNames: self.coverImageNames, backgroundImageNames: self.backgroundImageNames, button: enterButton)
         return vc
     }
     
     // Example 4 : Video
-    func videoIntroductionView() -> ZWIntroductionViewController {
-        let vc = ZWIntroductionViewController(video: self.videoURL)
+    func videoIntroductionView() -> ZWIntroductionView {
+        let vc = ZWIntroductionView(video: self.videoURL)
         vc.coverImageNames = self.coverImageNames
         vc.autoScrolling = true
         return vc
     }
     
     // Example 5 : Advance
-    func advanceIntroductionView() -> ZWIntroductionViewController {
+    func advanceIntroductionView() -> ZWIntroductionView {
         let loginButton = UIButton(frame: CGRectMake(3, self.window!.frame.size.height - 60, self.window!.frame.size.width - 6, 50))
         loginButton.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
         loginButton.setTitle("Login", forState: .Normal)
-        let vc = ZWIntroductionViewController(video: self.videoURL, volume: 0.7)
+        let vc = ZWIntroductionView(video: self.videoURL, volume: 0.7)
         vc.coverImageNames = self.coverImageNames
         vc.autoScrolling = true
         vc.hiddenEnterButton = true
@@ -133,10 +133,11 @@ Usage?
 //    self.introductionView = [self advanceIntroductionView];
 
     
-    [self.window addSubview:self.introductionView.view];
+    [self.window addSubview:self.introductionView];
     
     __weak AppDelegate *weakSelf = self;
-    self.introductionView.didSelectedEnter = ^() {        
+    self.introductionView.didSelectedEnter = ^() {
+        [weakSelf.introductionView removeFromSuperview];
         weakSelf.introductionView = nil;
     };
 ```
