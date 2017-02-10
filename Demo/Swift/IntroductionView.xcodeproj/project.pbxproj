@@ -13,6 +13,7 @@
 		59B33E4D1AB6A0DF00E44832 /* IntroductionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B33E4C1AB6A0DF00E44832 /* IntroductionViewTests.swift */; };
 		59B33E591AB6A11100E44832 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */; };
 		9516056F1D7D8298007016EB /* intro_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9516056E1D7D8298007016EB /* intro_video.mp4 */; };
+		95A9DC901E4DAFC400814F88 /* ZWIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A9DC8F1E4DAFC400814F88 /* ZWIntroductionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
 		59B33E5A1AB6A13400E44832 /* IntroductionView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntroductionView-Bridging-Header.h"; sourceTree = "<group>"; };
 		9516056E1D7D8298007016EB /* intro_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro_video.mp4; sourceTree = "<group>"; };
+		95A9DC8E1E4DAFC400814F88 /* ZWIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionView.h; sourceTree = "<group>"; };
+		95A9DC8F1E4DAFC400814F88 /* ZWIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 		59B33E561AB6A11100E44832 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				95A9DC8E1E4DAFC400814F88 /* ZWIntroductionView.h */,
+				95A9DC8F1E4DAFC400814F88 /* ZWIntroductionView.m */,
 				59B33E571AB6A11100E44832 /* ZWIntroductionViewController.h */,
 				59B33E581AB6A11100E44832 /* ZWIntroductionViewController.m */,
 			);
@@ -228,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A9DC901E4DAFC400814F88 /* ZWIntroductionView.m in Sources */,
 				59B33E371AB6A0DF00E44832 /* AppDelegate.swift in Sources */,
 				59B33E591AB6A11100E44832 /* ZWIntroductionViewController.m in Sources */,
 			);
