@@ -38,7 +38,7 @@ Usage?
         let filePath = NSBundle.mainBundle().pathForResource("intro_video", ofType: "mp4")
         self.videoURL = NSURL.fileURLWithPath(filePath!)
         
-        // Added Introduction View Controller
+        // Added Introduction View
         
 //        self.introductionView = self.simpleIntroductionView()
         
@@ -120,7 +120,7 @@ Usage?
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"intro_video" ofType:@"mp4"];
     self.videoURL = [NSURL fileURLWithPath:filePath];
 
-    // Added Introduction View Controller
+    // Added Introduction View
     
 //    self.introductionView = [self simpleIntroductionView];
     
