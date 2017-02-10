@@ -15,6 +15,7 @@
 		59D336F91A91D23B0089837F /* IntroductionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D336F81A91D23B0089837F /* IntroductionViewTests.m */; };
 		59D337051A91D2DC0089837F /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */; };
 		9516056D1D7D39AE007016EB /* intro_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9516056C1D7D39AE007016EB /* intro_video.mp4 */; };
+		952658651E4D8AAB00726779 /* ZWIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 952658641E4D8AAB00726779 /* ZWIntroductionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		59D337031A91D2DC0089837F /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
 		59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
 		9516056C1D7D39AE007016EB /* intro_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro_video.mp4; sourceTree = "<group>"; };
+		952658631E4D8AAB00726779 /* ZWIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionView.h; sourceTree = "<group>"; };
+		952658641E4D8AAB00726779 /* ZWIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 			children = (
 				59D337031A91D2DC0089837F /* ZWIntroductionViewController.h */,
 				59D337041A91D2DC0089837F /* ZWIntroductionViewController.m */,
+				952658631E4D8AAB00726779 /* ZWIntroductionView.h */,
+				952658641E4D8AAB00726779 /* ZWIntroductionView.m */,
 			);
 			name = Library;
 			path = ../../Library;
@@ -237,6 +242,7 @@
 				59D336E21A91D23B0089837F /* AppDelegate.m in Sources */,
 				59D336DF1A91D23B0089837F /* main.m in Sources */,
 				59D337051A91D2DC0089837F /* ZWIntroductionViewController.m in Sources */,
+				952658651E4D8AAB00726779 /* ZWIntroductionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) ZWIntroductionViewController *introductionView;
+@property (nonatomic, strong) ZWIntroductionView *introductionView;
 
 @property (nonatomic, strong) NSArray *coverImageNames;
 
@@ -43,7 +43,7 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"intro_video" ofType:@"mp4"];
     self.videoURL = [NSURL fileURLWithPath:filePath];
 
-    // Added Introduction View Controller
+    // Added Introduction View
     
 //    self.introductionView = [self simpleIntroductionView];
     
@@ -56,10 +56,11 @@
 //    self.introductionView = [self advanceIntroductionView];
 
     
-    [self.window addSubview:self.introductionView.view];
+    [self.window addSubview:self.introductionView];
     
     __weak AppDelegate *weakSelf = self;
-    self.introductionView.didSelectedEnter = ^() {        
+    self.introductionView.didSelectedEnter = ^() {
+        [weakSelf.introductionView removeFromSuperview];
         weakSelf.introductionView = nil;
     };
     
@@ -67,46 +68,46 @@
 }
 
 // Example 1 : Simple
-- (ZWIntroductionViewController *)simpleIntroductionView
+- (ZWIntroductionView *)simpleIntroductionView
 {
-    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.backgroundImageNames];
+    ZWIntroductionView *vc = [[ZWIntroductionView alloc] initWithCoverImageNames:self.backgroundImageNames];
     return vc;
 }
 
 // Example 2 : Cover Images
-- (ZWIntroductionViewController *)coverImagesIntroductionView
+- (ZWIntroductionView *)coverImagesIntroductionView
 {
-    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames];
+    ZWIntroductionView *vc = [[ZWIntroductionView alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames];
     return vc;
 }
 
 // Example 3 : Custom Button
-- (ZWIntroductionViewController *)customButtonIntroductionView
+- (ZWIntroductionView *)customButtonIntroductionView
 {
     UIButton *enterButton = [UIButton new];
     [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
     [enterButton setTitle:@"Login" forState:UIControlStateNormal];
-    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames button:enterButton];
+    ZWIntroductionView *vc = [[ZWIntroductionView alloc] initWithCoverImageNames:self.coverImageNames backgroundImageNames:self.backgroundImageNames button:enterButton];
     return vc;
 }
 
 // Example 4 : Video
-- (ZWIntroductionViewController *)videoIntroductionView
+- (ZWIntroductionView *)videoIntroductionView
 {
-    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithVideo:self.videoURL volume:0.7];
+    ZWIntroductionView *vc = [[ZWIntroductionView alloc] initWithVideo:self.videoURL volume:0.7];
     vc.coverImageNames = self.coverImageNames;
     vc.autoScrolling = YES;
     return vc;
 }
 
 // Example 5 : Advance
-- (ZWIntroductionViewController *)advanceIntroductionView
+- (ZWIntroductionView *)advanceIntroductionView
 {
     UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(3, self.window.frame.size.height - 60, self.window.frame.size.width - 6, 50)];
     loginButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [loginButton setTitle:@"Login" forState:UIControlStateNormal];
     
-    ZWIntroductionViewController *vc = [[ZWIntroductionViewController alloc] initWithVideo:self.videoURL volume:0.7];
+    ZWIntroductionView *vc = [[ZWIntroductionView alloc] initWithVideo:self.videoURL volume:0.7];
     vc.coverImageNames = self.coverImageNames;
     vc.autoScrolling = YES;
     vc.hiddenEnterButton = YES;
