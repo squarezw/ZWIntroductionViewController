@@ -250,6 +250,10 @@
     if (self.pagingScrollView.contentSize.width == self.pagingScrollView.frame.size.width) {
         self.pagingScrollView.contentSize = CGSizeMake(self.pagingScrollView.contentSize.width + 1, self.pagingScrollView.contentSize.height);
     }
+    
+    [[self backgroundViews] enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.frame = CGRectMake(obj.frame.origin.x, obj.frame.origin.y, self.frame.size.width, self.frame.size.height);
+    }];
 }
 
 - (CGRect)frameOfPageControl
