@@ -1,6 +1,6 @@
 {
   "name": "ZWIntroductionViewController",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "summary": "A simple custom App tutorials and welcome video",
   "homepage": "https://github.com/squarezw/ZWIntroductionViewController",
   "license": {
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/squarezw/ZWIntroductionViewController.git",
-    "tag": "0.3.6"
+    "tag": "0.3.7"
   },
   "source_files": "Library/*.{h,m}",
   "requires_arc": true
