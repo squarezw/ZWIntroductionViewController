@@ -11,8 +11,7 @@
 
 typedef void (^DidSelectedEnter)();
 
-// Warning: this class will be Deprecated in the future . Using ZWIntroductionView to initialize
-// __deprecated
+// Warning: This class may not exist in the future - no promises . Using ZWIntroductionView to initialize
 @interface ZWIntroductionViewController : UIViewController
 
 @property (nonatomic, strong) ZWIntroductionView *introductionView;
